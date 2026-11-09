@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171a16">
+  <title>Emberfall — Realms at War</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="game-ui.css">
+</head>
+<body>
+  <div class="game-shell">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">✦</div><div><div class="brand-title">EMBERFALL</div><div class="brand-subtitle">REALMS AT WAR</div></div></div>
+      <div class="realm-line"><span class="realm-dot"></span><span id="zoneName">ARESden · HAVEN</span><span class="divider">/</span><span id="worldClock">DAY 01 · 08:42</span></div>
+      <div class="top-actions"><span class="online"><i></i> OFFLINE MODE</span><button class="icon-btn" id="soundBtn" title="Toggle ambience">♫</button><button class="icon-btn" id="helpBtn" title="Controls">?</button></div>
+    </header>
+    <main class="layout">
+      <section class="world-frame">
+        <div class="world-canvas-wrap"><canvas id="world" aria-label="Isometric fantasy world"></canvas>
+          <div class="location-card"><div class="location-icon">⌖</div><div><b id="locationTitle">HAVEN'S REST</b><span id="locationSub">Aresden · Frontier Province</span></div></div>
+          <div class="weather">☀ <span>FAIR SKIES</span></div>
+          <div class="world-toast" id="toast"></div>
+          <div class="target-card hidden" id="targetCard"><div class="target-avatar" id="targetIcon">♟</div><div class="target-info"><b id="targetName">Goblin Scout</b><div class="target-health"><i id="targetHealth"></i></div><small id="targetLevel">Lv. 1 · Hostile</small></div><button id="targetClose" class="target-close">×</button></div>
+          <div class="map-label" id="mapLabel">Haven's meadow</div>
+          <div class="corner-note"><span class="pulse"></span> YOUR JOURNEY BEGINS</div>
+        </div>
+        <div class="world-footer">
+          <div class="quick-hint"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> <span>move</span><span class="hint-sep">·</span><kbd>SPACE</kbd> <span>attack</span><span class="hint-sep">·</span><kbd>E</kbd> <span>interact</span></div>
+          <div class="footer-coords" id="coordinates">15, 15 <span>·</span> HAVEN</div>
+        </div>
+      </section>
+      <aside class="sidebar">
+        <section class="profile panel">
+          <div class="profile-head"><div class="portrait" id="portrait"><span>♙</span><i class="faction-sigil">✦</i></div><div class="profile-name"><div class="eyebrow" id="factionLabel">ARESden</div><h1 id="characterName">Aethra</h1><div class="class-line"><span id="className">Wayfarer</span><span class="level-pill">LEVEL <b id="level">1</b></span></div></div><button class="edit-profile" id="editProfile" title="Character creation">✎</button></div>
+          <div class="vitals"><div class="vital-row"><div class="vital-label"><span>♥</span> HEALTH</div><div class="vital-value" id="hpText">100 / 100</div></div><div class="bar hp"><i id="hpBar"></i></div><div class="vital-row mana-row"><div class="vital-label"><span>✧</span> MANA</div><div class="vital-value" id="mpText">45 / 45</div></div><div class="bar mana"><i id="mpBar"></i></div></div>
+          <div class="xp-row"><span>EXPERIENCE</span><b id="xpText">0 / 100</b></div><div class="bar xp"><i id="xpBar"></i></div>
+          <div class="coin-row"><span>◈ &nbsp;CROWNS</span><b id="gold">25</b></div>
+        </section>
+        <section class="quest-panel panel"><div class="panel-title"><span class="title-glyph">✧</span><span>FIELD JOURNAL</span><span class="title-line"></span></div><div id="questContent"><div class="quest-kicker">FIRST STEPS <span>MAIN</span></div><h3 id="questTitle">A Favor for the Guard</h3><p id="questText">Speak with Captain Rowan near the town well. The frontier has grown restless.</p><div class="quest-progress"><div class="quest-track"><i id="questProgressBar"></i></div><span id="questProgressText">0 / 1</span></div></div><button class="journal-link" id="journalBtn">VIEW JOURNAL <span>↗</span></button></section>
+        <section class="nearby-panel panel"><div class="panel-title"><span class="title-glyph">⌖</span><span>NEARBY</span><span class="title-line"></span></div><div class="nearby-row"><span class="nearby-icon npc-icon">♟</span><span><b>Captain Rowan</b><small>Town Guard · Haven's Rest</small></span><i class="nearby-dot friendly"></i></div><div class="nearby-row"><span class="nearby-icon beast-icon">♞</span><span><b id="nearbyThreat">Goblin Scout</b><small>Hostile · Whispering Meadow</small></span><i class="nearby-dot hostile"></i></div></section>
+        <section class="lower-nav panel"><button class="nav-tile active" data-tab="inventory"><span>▤</span><b>BAG</b><small>I</small></button><button class="nav-tile" data-tab="character"><span>♙</span><b>STATS</b><small>C</small></button><button class="nav-tile" data-tab="skills"><span>✧</span><b>SKILLS</b><small>K</small></button><button class="nav-tile" data-tab="map"><span>⌖</span><b>MAP</b><small>M</small></button></section>
+      </aside>
+    </main>
+    <footer class="actionbar"><div class="action-tabs"><span class="action-label">QUICK ACTIONS</span><button class="action-slot selected" id="weaponSlot"><span class="slot-key">Q</span><span class="slot-symbol">⚔</span><span class="slot-caption">Strike</span></button><button class="action-slot spell-slot" id="spellSlot"><span class="slot-key">1</span><span class="slot-symbol">✹</span><span class="slot-caption">Ember bolt</span></button><button class="action-slot heal-slot" id="healSlot"><span class="slot-key">2</span><span class="slot-symbol">✚</span><span class="slot-caption">Mend</span></button><button class="action-slot" id="potionSlot"><span class="slot-key">3</span><span class="slot-symbol">⚗</span><span class="slot-caption">Tonic <i id="potionCount">2</i></span></button></div><div class="combat-tip"><span class="tip-icon">✦</span><span>THE WILDS AWAIT</span><small>Seek your fortune beyond the eastern gate</small></div><div class="hotbar-end"><button id="restBtn" class="rest-btn"><span>◌</span> REST</button><button id="menuBtn" class="menu-btn">☰</button></div></footer>
+  </div>
+  <div class="modal-backdrop hidden" id="modalBackdrop"><section class="modal" id="modal"></section></div>
+  <div class="toast-rail" id="toastRail"></div>
+  <script src="game.js"></script>
+</body>
+</html>
